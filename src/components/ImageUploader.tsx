@@ -96,11 +96,16 @@ const ImageUploader = ({ onUploadComplete, isUploading, setIsUploading, uploaded
         )}
       </div>
 
+      {/* @ts-ignore webkitdirectory is non-standard */}
       <input
         ref={fileInputRef}
         type="file"
         accept="image/*"
         multiple
+        // @ts-ignore
+        webkitdirectory=""
+        // @ts-ignore
+        directory=""
         onChange={handleFilesSelected}
         className="hidden"
       />
@@ -111,8 +116,8 @@ const ImageUploader = ({ onUploadComplete, isUploading, setIsUploading, uploaded
         className="w-full border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary/50 transition-colors cursor-pointer disabled:opacity-40"
       >
         <Upload className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-        <p className="text-sm text-muted-foreground">Click to select images</p>
-        <p className="text-xs text-muted-foreground/60 mt-1">JPG, PNG, WebP supported</p>
+        <p className="text-sm text-muted-foreground">Click to select a folder</p>
+        <p className="text-xs text-muted-foreground/60 mt-1">All images (JPG, PNG, WebP) in the folder will be uploaded</p>
       </button>
 
       {selectedFiles.length > 0 && (
