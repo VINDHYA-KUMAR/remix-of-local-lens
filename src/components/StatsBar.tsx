@@ -1,4 +1,4 @@
-import { Database, Image, Layers, Copy } from "lucide-react";
+import { Image, Database, Layers, Cloud } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface StatsBarProps {
@@ -8,16 +8,15 @@ interface StatsBarProps {
   duplicates: number;
 }
 
-const StatsBar = ({ totalImages, indexedFolders, groups, duplicates }: StatsBarProps) => {
+const StatsBar = ({ totalImages, groups }: StatsBarProps) => {
   const stats = [
-    { icon: Image, label: "Images", value: totalImages, color: "text-primary" },
-    { icon: Database, label: "Folders", value: indexedFolders, color: "text-accent" },
-    { icon: Layers, label: "Groups", value: groups, color: "text-success" },
-    { icon: Copy, label: "Duplicates", value: duplicates, color: "text-warning" },
+    { icon: Image, label: "Total Images", value: totalImages, color: "text-primary" },
+    { icon: Layers, label: "AI Analyzed", value: groups, color: "text-success" },
+    { icon: Cloud, label: "Storage", value: "Cloud", color: "text-accent" },
   ];
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+    <div className="grid grid-cols-3 gap-3">
       {stats.map((stat, i) => (
         <motion.div
           key={stat.label}
