@@ -18,8 +18,9 @@ const ImageUploader = ({ onUploadComplete, isUploading, setIsUploading, uploaded
   const [progress, setProgress] = useState(0);
 
   const handleFilesSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const imageExtensions = /\.(jpe?g|png|gif|webp|bmp|tiff?|svg|heic|avif)$/i;
     const files = Array.from(e.target.files || []).filter(f =>
-      f.type.startsWith("image/")
+      f.type.startsWith("image/") || imageExtensions.test(f.name)
     );
     setSelectedFiles(files);
   };
