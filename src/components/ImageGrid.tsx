@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
-import { Image as ImageIcon, Copy, Trash2 } from "lucide-react";
+import { Image as ImageIcon, Copy } from "lucide-react";
 
 export interface SearchResult {
   id: string;
-  path: string;
+  url: string;
   filename: string;
   similarity: number;
-  group_id?: number;
+  description?: string;
+  tags?: string[];
   is_duplicate?: boolean;
 }
 
@@ -49,8 +50,8 @@ const ImageGrid = ({ results, isLoading, hasSearched }: ImageGridProps) => {
         className="flex flex-col items-center justify-center py-20 text-muted-foreground"
       >
         <ImageIcon className="h-12 w-12 mb-3 opacity-40" />
-        <p className="text-lg font-medium">Search your local gallery</p>
-        <p className="text-sm mt-1">Describe what you're looking for in natural language</p>
+        <p className="text-lg font-medium">Search your image gallery</p>
+        <p className="text-sm mt-1">Upload images, then describe what you're looking for</p>
       </motion.div>
     );
   }
@@ -66,7 +67,7 @@ const ImageGrid = ({ results, isLoading, hasSearched }: ImageGridProps) => {
           className="group relative aspect-square rounded-lg overflow-hidden bg-muted border border-border hover:border-primary/40 transition-colors cursor-pointer"
         >
           <img
-            src={`http://localhost:8000/file?path=${encodeURIComponent(result.path)}`}
+            src={result.url}
             alt={result.filename}
             className="w-full h-full object-cover transition-transform group-hover:scale-105"
             loading="lazy"
@@ -75,17 +76,22 @@ const ImageGrid = ({ results, isLoading, hasSearched }: ImageGridProps) => {
           <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
             <div className="absolute bottom-0 left-0 right-0 p-2.5">
               <p className="text-xs font-mono text-foreground truncate">{result.filename}</p>
+              {result.description && (
+                <p className="text-[10px] text-muted-foreground truncate mt-0.5">{result.description}</p>
+              )}
               <div className="flex items-center justify-between mt-1">
                 <span className="text-[10px] font-mono text-primary">
                   {(result.similarity * 100).toFixed(1)}% match
                 </span>
-                <div className="flex gap-1">
-                  {result.is_duplicate && (
-                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-warning/20 text-warning">
-                      <Copy className="h-3 w-3 inline" /> Dup
-                    </span>
-                  )}
-                </div>
+                {result.tags && result.tags.length > 0 && (
+                  <div className="flex gap-1">
+                    {result.tags.slice(0, 2).map(tag => (
+                      <span key={tag} className="text-[9px] px-1 py-0.5 rounded bg-muted text-muted-foreground">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>
