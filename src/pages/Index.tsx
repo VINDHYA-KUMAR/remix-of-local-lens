@@ -50,11 +50,8 @@ const Index = () => {
       <header className="border-b border-border glass sticky top-0 z-40">
         <div className="container flex items-center justify-between py-4">
           <div className="flex items-center gap-3">
-            <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center glow-primary">
-              <Zap className="h-5 w-5 text-primary" />
-            </div>
             <div>
-              <h1 className="font-heading font-bold text-lg text-foreground tracking-tight">PixelMind</h1>
+              <h1 className="font-heading font-bold text-lg text-foreground tracking-tight">Album Premium Search</h1>
               <p className="text-[11px] text-muted-foreground font-mono">AI Image Search</p>
             </div>
           </div>

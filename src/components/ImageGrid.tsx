@@ -58,7 +58,13 @@ const ImageGrid = ({ results, isLoading, hasSearched }: ImageGridProps) => {
 
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-      {results.map((result, index) => (
+      {results.filter(r => r.similarity >= 0.8).length === 0 && (
+        <div className="col-span-full flex flex-col items-center justify-center py-20 text-muted-foreground">
+          <p className="text-lg font-medium">No results with 80%+ match</p>
+          <p className="text-sm mt-1">Try broader search terms</p>
+        </div>
+      )}
+      {results.filter(r => r.similarity >= 0.8).map((result, index) => (
         <motion.div
           key={result.id}
           initial={{ opacity: 0, scale: 0.95 }}
