@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Zap, Cloud } from "lucide-react";
+import { Cloud } from "lucide-react";
 import SearchBar from "@/components/SearchBar";
 import ImageGrid, { type SearchResult } from "@/components/ImageGrid";
 import ImageUploader from "@/components/ImageUploader";
